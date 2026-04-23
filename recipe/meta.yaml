@@ -10,17 +10,17 @@ source:
   sha256: 20df0770eeb70d9f2965e13faf4cf83f8ef34f84c4d296a6d1c623442931a08e
 
 build:
-  number: 0
+  noarch: generic
+  number: 1
   script:
     - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
-  skip: true  # [win]
 
 requirements:
   host:
-    - ruby >=2.5,<2.6
+    - ruby >=2.7,<3
   run:
-    - ruby >=2.5,<2.6
+    - ruby >=2.7,<3
     - rb-rainbow
     - rb-open_uri_redirections
     - rb-activesupport
