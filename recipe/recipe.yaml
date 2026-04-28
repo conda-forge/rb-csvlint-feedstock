@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  name: csvlint
+  version: 1.3.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 20df0770eeb70d9f2965e13faf4cf83f8ef34f84c4d296a6d1c623442931a08e
+
+build:
+  number: 1
+  skip: win
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=2.5,<2.6
+  run:
+    - ruby >=2.5,<2.6
+    - rb-rainbow
+    - rb-open_uri_redirections
+    - rb-activesupport
+    - rb-addressable
+    - rb-typhoeus
+    - rb-escape_utils
+    - rb-uri_template
+    - rb-thor
+    - rb-rack
+    - rb-net-http-persistent
+    - rb-concurrent-ruby <1.1
+
+tests:
+  - script:
+      - csvlint help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.md
+  summary: A ruby gem to support validating CSV files to check their syntax and contents.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/Data-Liberation-Front/csvlint.rb
+  documentation: https://www.rubydoc.info/gems/csvlint
+
+extra:
+  recipe-maintainers:
+    - svengiegerich
+    - janjagusch
